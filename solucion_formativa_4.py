@@ -33,6 +33,29 @@ def turistas_por_pais(pais):
     else:
         print("No se encontraron turistas con ese país")
 
+
+'''
+Recibe como argumento un mes (int) del 1 al 12.
+Luego imprime el porcentaje de turistas con el mes ingresado (del total del diccionario)
+'''
+def turistas_por_mes(mes):
+    total = len(turistas)
+    turistas_mes = 0
+
+    for clave in turistas:
+        # Crea una lista de un texto separandolo por "-"
+        # por ejemplo, "13-03-2023" se convertira en:
+        # ["13", "03", "2023"]
+        fecha = turistas[clave][2].split("-")
+
+        if int(fecha[1]) == mes:
+            turistas_mes += 1
+    
+    porcentaje = (turistas_mes * 100) / total
+
+    print(f"El número de turistas equivale al {porcentaje} % del total.")
+
+
 while True:
     print('''
        *** MENU PRINCIPAL ***
@@ -62,7 +85,20 @@ while True:
 
     # Turista por mes
     elif opcion == 2:
-        pass
+        mes_usuario = 0
+        try:
+            mes_usuario = int(input("Ingrese un mes (1-12): "))
+        except ValueError as error:
+            print("Ingrese un número válido")
+
+        while True:
+            if mes_usuario >= 1 and mes_usuario <= 12:
+                break
+            else:
+                print("Debe ingresar un valor entre 1 y 12. Inténtelo nuevamente.")
+                mes_usuario = int(input("Ingrese un mes (1-12): "))
+        
+        turistas_por_mes(mes_usuario)
 
     # Eliminar turista
     elif opcion == 3:
