@@ -13,6 +13,26 @@ turistas = {
     "011": ["Sofia Gomez", "Argentina", "07-04-2024"],
      }
 
+'''
+Recibe como argumento un país (string), luego compara con los paises de
+los turistas del diccionario, si coincide entonces agrega EL NOMBRE a la
+lista nombres_turistas.
+Si nombres_turistas no está vacío (longitud es mayor a 0), imprime la lista
+'''
+def turistas_por_pais(pais):
+    nombres_turistas = []
+
+    for clave in turistas:
+        # lower() para comparar los 2 paises con minúsculas, 
+        # independientemente si tienen mayúsculas o no
+        if turistas[clave][1].lower() == pais.lower():
+            nombres_turistas.append(turistas[clave][0])
+    
+    if len(nombres_turistas) > 0:
+        print(nombres_turistas)
+    else:
+        print("No se encontraron turistas con ese país")
+
 while True:
     print('''
        *** MENU PRINCIPAL ***
@@ -36,7 +56,9 @@ while True:
 
     #Turistas por país
     elif opcion == 1:
-        pass
+        pais_usuario = input("Ingrese un país: ")
+
+        turistas_por_pais(pais_usuario)
 
     # Turista por mes
     elif opcion == 2:
