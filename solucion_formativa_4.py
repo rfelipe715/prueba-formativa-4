@@ -48,13 +48,36 @@ def turistas_por_mes(mes):
         # ["13", "03", "2023"]
         fecha = turistas[clave][2].split("-")
 
+        # el mes que está en fecha es un string, por lo que necesita convertir a int.
+        # Al convertir a int, los "0" del mes en fecha serán quitados (02, 05, etc...)
         if int(fecha[1]) == mes:
             turistas_mes += 1
     
-    porcentaje = (turistas_mes * 100) / total
+    porcentaje = round((turistas_mes * 100) / total, 2)
 
     print(f"El número de turistas equivale al {porcentaje} % del total.")
 
+
+'''
+Elimina un turista por nombre
+No recibe ningún argumento
+'''
+def eliminar_turista():
+    nombre_turista = input("Ingrese nombre del turista a eliminar: ")
+
+    turista_a_eliminar = "" # Se reemplaza con la clave del usuario encontrado
+
+    for clave in turistas:
+        # Se compara con lower() para que ambos strings estén en minúsculas
+        if turistas[clave][0].lower() == nombre_turista.lower():
+            turista_a_eliminar = clave
+    
+    if len(turista_a_eliminar) > 0:
+        del turistas[turista_a_eliminar]
+        
+        print("Turista eliminado con exito.")
+    else:
+        print("Turista no encontrado. No se pudo eliminar")
 
 while True:
     print('''
@@ -102,7 +125,8 @@ while True:
 
     # Eliminar turista
     elif opcion == 3:
-        pass
+        eliminar_turista()
+        
     else:
         print("Por favor, ingrese una opción válida")
 
